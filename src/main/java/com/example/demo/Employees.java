@@ -71,5 +71,18 @@ public class Employees {
 		}
 		return null;
 	}
+
+	public void patchEmployee(Employee employee) {
+		for (Employee emp : employeeList) {
+			if (emp.isEqual(employee)) {
+				if (employee.getFirstName() != null)
+					emp.setFirstName(employee.getFirstName());
+				if (employee.getLastName() != null)
+					emp.setLastName(employee.getLastName());
+				if (employee.getEmail() != null)
+					emp.setEmail(employee.getEmail());
+			}
+		}
+	}
 	
 }

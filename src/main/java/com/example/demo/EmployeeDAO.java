@@ -51,6 +51,14 @@ public class EmployeeDAO {
 			this.addEmployee(employee);
 	}
 	
+	public void patchEmployee(Employee employee) {
+		if (list.contains(employee.getId())) {
+			list.patchEmployee(employee);
+		}
+		else
+			this.addEmployee(employee);
+	}
+	
 	// Method to remove an employee from the employees list	,
 	// returns true if successful, false if employee doesn't exist
 	public boolean removeEmployeeWithId(int id) {

@@ -50,7 +50,7 @@ public class EmployeeController {
 		return ResponseEntity.created(location).build();
 	}
 	
-	// Create a PUT method to update an existing employee to the list or add if not found
+	// Create a PUT method to update an existing employee on the list by replacing it with the param or add if not found
 	@PutMapping(path = "/", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> putEmployee(@RequestBody Employee employee) {
 		employeeDao.putEmployee(employee);
@@ -58,10 +58,10 @@ public class EmployeeController {
 		return ResponseEntity.created(location).build();
 	}
 	
-	// Create a PUT method to update an existing employee to the list or add if not found
+	// Create a PATCH method that updates an employee with not null fields param that are not null
 	@PatchMapping(path = "/", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> patchEmployee(@RequestBody Employee employee) {
-		employeeDao.updateEmployee(employee);
+		employeeDao.patchEmployee(employee);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employee.getId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
