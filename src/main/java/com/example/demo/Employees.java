@@ -52,16 +52,14 @@ public class Employees {
 		}
 	}
 
-	public boolean updateEmployee(Employee employee) {
+	public void updateEmployee(Employee employee) {
 		for (Employee emp : employeeList) {
 			if (emp.isEqual(employee)) {
 				emp.setFirstName(employee.getFirstName());
 				emp.setLastName(employee.getLastName());
 				emp.setEmail(employee.getEmail());
-				return true;
 			}
 		}
-		return false;
 	}
 	
 	public Employee getEmployee(int id) {

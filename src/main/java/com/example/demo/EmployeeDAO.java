@@ -45,7 +45,7 @@ public class EmployeeDAO {
 
 	public void updateEmployee(Employee employee) {
 		if (list.contains(employee.getId())) {
-			
+			list.updateEmployee(employee);
 		}
 		else
 			this.addEmployee(employee);
