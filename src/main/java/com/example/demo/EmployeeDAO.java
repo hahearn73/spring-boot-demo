@@ -40,10 +40,21 @@ public class EmployeeDAO {
 	 
 	// Method to add an employee to the employees list
 	public void	addEmployee(Employee employee) {
+		if (employee.getId() == null || getEmployee(employee) == null) { // if doesn't exist
+			Integer id = list.size() + 1; // give it an id
+			employee.setId(id);
+		}
 		list.getEmployeeList().add(employee);
 	}
 
+	// Method to update all attributes of employee that
+	// matches employee.id with new attributes
 	public void updateEmployee(Employee employee) {
+		if (employee.getId() == null) { // no id -> post request
+			addEmployee(employee);
+			return;
+		}
+		
 		if (list.contains(employee.getId())) {
 			list.updateEmployee(employee);
 		}
@@ -51,7 +62,14 @@ public class EmployeeDAO {
 			this.addEmployee(employee);
 	}
 	
+	// Method to patch give employee with employee.id
+	// the same non null attributes as employee
 	public void patchEmployee(Employee employee) {
+		if (employee.getId() == null) { // no id -> post request
+			addEmployee(employee);
+			return;
+		}
+			
 		if (list.contains(employee.getId())) {
 			list.patchEmployee(employee);
 		}
@@ -64,6 +82,7 @@ public class EmployeeDAO {
 	public boolean removeEmployeeWithId(int id) {
 		if (list.contains(id)) {
 			list.remove(id);
+			fixIds();
 			return true;
 		}
 		return false;
@@ -80,10 +99,9 @@ public class EmployeeDAO {
 			this.addEmployee(employee);
 		}
 	}
-	
-	// sets list to null
-	public void deleteList() {
-		list = null;
+
+	public Integer size() {
+		return list.size();
 	}
 		
 }

@@ -23,9 +23,21 @@ public class Employee {
 		this.email = email;
 	}
 	
-	public boolean isEqual(Employee employee) {
-		return this.id == employee.getId();
+	public Employee(int id) {
+		this(id, null, null, null);
 	}
+	
+	// Employee objects are equivalent if their id's match
+	@Override
+	public boolean equals(Object employee) {
+		return this.id == ((Employee) employee).getId();
+	}
+	
+	// ensures that hash codes are equivalent between equivalent employees
+	@Override
+    public int hashCode() {
+        return this.id;
+    }
 
 	// Overriding the toString method
 	// to find all the values

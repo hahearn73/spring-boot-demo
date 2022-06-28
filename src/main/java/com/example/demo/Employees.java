@@ -15,7 +15,7 @@ public class Employees {
 	public List<Employee> getEmployeeList()
 	{
 		if (employeeList == null) {
-			employeeList = new ArrayList<>();   
+			employeeList = new ArrayList<Employee>();   
 		}
 		return employeeList;
 	}
@@ -54,7 +54,7 @@ public class Employees {
 
 	public boolean updateEmployee(Employee employee) {
 		for (Employee emp : employeeList) {
-			if (emp.isEqual(employee)) {
+			if (emp.equals(employee)) {
 				emp.setFirstName(employee.getFirstName());
 				emp.setLastName(employee.getLastName());
 				emp.setEmail(employee.getEmail());
@@ -74,7 +74,7 @@ public class Employees {
 
 	public void patchEmployee(Employee employee) {
 		for (Employee emp : employeeList) {
-			if (emp.isEqual(employee)) {
+			if (emp.equals(employee)) {
 				if (employee.getFirstName() != null)
 					emp.setFirstName(employee.getFirstName());
 				if (employee.getLastName() != null)
@@ -84,5 +84,9 @@ public class Employees {
 			}
 		}
 	}
-	
+
+	public int size() {
+		return employeeList.size();
+	}
+
 }

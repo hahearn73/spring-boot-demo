@@ -21,11 +21,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class EmployeeController {
 
 	@Autowired
-	private EmployeeDAO employeeDao;
+	private EmployeeDAO employeeDao = new EmployeeDAO();
 	 
 	// Implementing a GET method to get the list of all the employees
 	@GetMapping(path = "/", produces = "application/json")
-	public Employees getAllEmployees(Employee employee)
+	public Employees getAllEmployees()
 	{
 		return employeeDao.getAllEmployees();
 	}
@@ -38,14 +38,8 @@ public class EmployeeController {
 	 
 	// Create a POST method to add an employee to the list
 	@PostMapping(path = "/", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<Object> addEmployee(@RequestBody Employee employee)
-	{
-		if (employeeDao.getEmployee(employee) == null) { // avoids duplication
-			// Creating an ID of an employee from the number of employees
-			Integer id = employeeDao.getAllEmployees().getEmployeeList().size()	+ 1;
-			employee.setId(id);
-			employeeDao.addEmployee(employee);
-		}
+	public ResponseEntity<Object> addEmployee(@RequestBody Employee employee) {
+		employeeDao.addEmployee(employee);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employee.getId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
@@ -78,9 +72,14 @@ public class EmployeeController {
 	}
 	
 	// Implementing a DELETE method that deletes the whole list
+	// removes first index and decrements all other indices, continues
+	// until all other indices are removed
 	@DeleteMapping(path = "/", produces = "application/json")
 	public HttpStatus clearEmployees() {
-		employeeDao.deleteList();
+		Integer size = employeeDao.size();
+		for (int i = 0; i <= size; i++) {
+			employeeDao.removeEmployeeWithId(1);
+		}
 		return HttpStatus.OK;
 	}
 
