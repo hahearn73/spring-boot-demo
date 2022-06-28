@@ -1,7 +1,9 @@
-package com.example.demo;
+package com.example.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.domain.Employee;
 
 // Class to store the list of
 // all the employees in an

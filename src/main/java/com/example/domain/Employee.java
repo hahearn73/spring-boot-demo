@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.domain;
 
 // Creating an entity Employee
 public class Employee {

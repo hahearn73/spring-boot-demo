@@ -1,8 +1,11 @@
-package com.example.demo;
+package com.example.service;
 
 import org.springframework
 	.stereotype
 	.Repository;
+
+import com.example.domain.Employee;
+import com.example.repository.Employees;
 
 // Importing the employees class to
 // use the defined properties

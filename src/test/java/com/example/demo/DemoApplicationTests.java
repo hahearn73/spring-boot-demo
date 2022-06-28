@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.controller.EmployeeController;
+import com.example.domain.Employee;
+
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class) // used to ensure delete all happens last
 class DemoApplicationTests {
