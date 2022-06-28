@@ -78,7 +78,7 @@ public class EmployeeController {
 	public HttpStatus clearEmployees() {
 		Integer size = employeeDao.size();
 		for (int i = 0; i <= size; i++) {
-			employeeDao.removeEmployeeWithId(1);
+			employeeDao.removeEmployeeWithId(i);
 		}
 		return HttpStatus.OK;
 	}

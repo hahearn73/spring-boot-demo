@@ -46,6 +46,7 @@ public class Employees {
 
 	// makes that all ids are the previous employee's id + 1
 	public void fixIds() {
+		employeeList.get(0).setId(1);
 		for (int i = 1; i < employeeList.size(); i++) {
 			if (employeeList.get(i).getId() != employeeList.get(i - 1).getId() + 1)
 				employeeList.get(i).setId(employeeList.get(i - 1).getId() + 1);

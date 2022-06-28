@@ -15,13 +15,12 @@ import org.springframework
 // of employees
 public class EmployeeDAO {
 
-	private static Employees list = new Employees();
-
-	// This static block is executed
-	// before executing the main
-	// block
-	static {
-		// Creating a few employees and adding them to the list
+	private Employees list ;//= new Employees();
+	
+	public EmployeeDAO() {
+		list = new Employees();
+		
+		// starter data for testing; comment out for real use
 		list.getEmployeeList().add(new Employee(1, "Prem", "Tiwari", "chapradreams@gmail.com"));
 		list.getEmployeeList().add(new Employee(2, "Vikash", "Kumar", "abc@gmail.com"));
 		list.getEmployeeList().add(new Employee(3, "Ritesh", "Ojha", "asdjf@gmail.com")); 
@@ -82,7 +81,6 @@ public class EmployeeDAO {
 	public boolean removeEmployeeWithId(int id) {
 		if (list.contains(id)) {
 			list.remove(id);
-			fixIds();
 			return true;
 		}
 		return false;

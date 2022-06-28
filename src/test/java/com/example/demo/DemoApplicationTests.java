@@ -60,10 +60,78 @@ class DemoApplicationTests {
 	}
 	
 	@Test
-	@Order(4) // this must be last, all other tests are pure and can be in any order
-	public void deleteAllGetAll() {
+	@Order(4)
+	public void clearGetAll() {
 		controller.clearEmployees();
 		assertNull(controller.getEmployee(new Employee(1)));
+	}
+	
+	@Test
+	@Order(5)
+	public void postPutPatchAfterClear() {
+		controller.putEmployee(new Employee(3));
+		assertNotNull(controller.getEmployee(new Employee(1))); // gets put at front
+		controller.clearEmployees();
+		controller.patchEmployee(new Employee(3));
+		assertNotNull(controller.getEmployee(new Employee(1))); // gets put at front
+		controller.clearEmployees();
+		controller.addEmployee(new Employee(3));
+		assertNotNull(controller.getEmployee(new Employee(1))); // gets put at front
+	}
+	
+	@Test
+	@Order(6)
+	public void deleteTests() {
+		controller.clearEmployees();
+		Employee a = new Employee(1, "a", "a", "a");
+		Employee b = new Employee(2, "b", "b", "b");
+		Employee c = new Employee(3, "c", "c", "c");
+		
+		controller.addEmployee(a);
+		controller.addEmployee(b);
+		controller.addEmployee(c);
+		
+		// delete middle
+		controller.deleteEmployee(new Employee(2));
+		a = controller.getEmployee(new Employee(1));
+		assertEquals(a.getFirstName(), "a");
+		c = controller.getEmployee(new Employee(2));
+		assertEquals(c.getFirstName(), "c");
+		assertNull(controller.getEmployee(new Employee(3)));
+		
+		// reset
+		controller.clearEmployees();
+		a = new Employee(1, "a", "a", "a");
+		b = new Employee(2, "b", "b", "b");
+		c = new Employee(3, "c", "c", "c");
+		controller.addEmployee(a);
+		controller.addEmployee(b);
+		controller.addEmployee(c);
+		
+		// delete tail
+		controller.deleteEmployee(c);
+		a = controller.getEmployee(new Employee(1));
+		assertEquals(a.getFirstName(), "a");
+		b = controller.getEmployee(new Employee(2));
+		assertEquals(b.getFirstName(), "b");
+		assertNull(controller.getEmployee(new Employee(3)));
+		
+		// reset
+		controller.clearEmployees();
+		a = new Employee(1, "a", "a", "a");
+		b = new Employee(2, "b", "b", "b");
+		c = new Employee(3, "c", "c", "c");
+		controller.addEmployee(a);
+		controller.addEmployee(b);
+		controller.addEmployee(c);
+		
+		// delete head
+		controller.deleteEmployee(a);
+		b = controller.getEmployee(new Employee(1));
+		assertEquals(b.getFirstName(), "b");
+		c = controller.getEmployee(new Employee(2));
+		assertEquals(c.getFirstName(), "c");
+		assertNull(controller.getEmployee(new Employee(3)));
 	}
 
 }
