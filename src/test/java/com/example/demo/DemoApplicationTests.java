@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.controller.EmployeeController;
 import com.example.domain.Employee;
+import com.example.repository.Employees;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class) // used to ensure delete all happens last
@@ -135,6 +137,29 @@ class DemoApplicationTests {
 		c = controller.getEmployee(new Employee(2));
 		assertEquals(c.getFirstName(), "c");
 		assertNull(controller.getEmployee(new Employee(3)));
+	}
+	
+	@Test
+	@Order(7)
+	public void getAllTest() {
+		controller.clearEmployees();
+		Employee a = new Employee(1, "a", "a", "a");
+		Employee b = new Employee(2, "b", "b", "b");
+		Employee c = new Employee(3, "c", "c", "c");
+		controller.addEmployee(a);
+		controller.addEmployee(b);
+		controller.addEmployee(c);
+		
+		Employees list = new Employees();
+		list.addEmployee(a);
+		list.addEmployee(b);
+		list.addEmployee(c);
+		Employees ret = controller.getAllEmployees();
+		
+		for (int i = 1; i < list.size(); i++) {
+			assert(ret.getEmployee(i).equals(ret.getEmployee(i)));
+			assert(ret.getEmployee(i).getFirstName().equals(ret.getEmployee(i).getFirstName()));
+		}
 	}
 
 }

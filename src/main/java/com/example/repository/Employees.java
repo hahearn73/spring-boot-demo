@@ -5,25 +5,18 @@ import java.util.List;
 
 import com.example.domain.Employee;
 
-// Class to store the list of
-// all the employees in an
-// Array List
+// Class to store the list of all the employees in an ArrayList
 public class Employees {
 
-	private List<Employee> employeeList;
-
-	// Method to return the list
-	// of employees
-	public List<Employee> getEmployeeList()
-	{
-		if (employeeList == null) {
-			employeeList = new ArrayList<Employee>();   
-		}
+	private List<Employee> employeeList = new ArrayList<Employee>();
+	
+	// necessary for getting all employees
+	public List<Employee> getEmployeeList() {
 		return employeeList;
 	}
-
-	public void setEmployeeList(List<Employee> employeeList) {
-		this.employeeList = employeeList;
+	
+	public void addEmployee(Employee employee) {
+		employeeList.add(employee);
 	}
 
 	// calls employeeList.remove() on the employee with id id
@@ -36,7 +29,8 @@ public class Employees {
 		}
 	}
 
-	// returns true if employeeList contains an employee with id id, false otherwise
+	// returns true if employeeList contains an employee with id id
+	// false otherwise
 	public boolean contains(int id) {
 		for (Employee emp : employeeList) {
 			if (emp.getId() == id) {
@@ -55,6 +49,8 @@ public class Employees {
 		}
 	}
 
+	// sets employee with id employee.id to all attributes
+	// of employees
 	public boolean updateEmployee(Employee employee) {
 		for (Employee emp : employeeList) {
 			if (emp.equals(employee)) {
@@ -67,6 +63,7 @@ public class Employees {
 		return false;
 	}
 	
+	// returns employee with id id
 	public Employee getEmployee(int id) {
 		for (Employee employee : employeeList) {
 			if (employee.getId() == id) 
@@ -75,6 +72,8 @@ public class Employees {
 		return null;
 	}
 
+	// Method to set employee with id of employee.id
+	// to the same non null attributes of param
 	public void patchEmployee(Employee employee) {
 		for (Employee emp : employeeList) {
 			if (emp.equals(employee)) {
@@ -88,6 +87,7 @@ public class Employees {
 		}
 	}
 
+	// returns size of the employeeList
 	public int size() {
 		return employeeList.size();
 	}

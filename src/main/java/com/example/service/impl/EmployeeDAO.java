@@ -1,32 +1,26 @@
-package com.example.service;
+package com.example.service.impl;
 
-import org.springframework
-	.stereotype
-	.Repository;
+import org.springframework.stereotype.Repository;
 
 import com.example.domain.Employee;
 import com.example.repository.Employees;
+import com.example.service.SampleService;
 
-// Importing the employees class to
-// use the defined properties
-// in this class
-//import com.example.demo.Employees;
 
 @Repository
 
 // Class to create a list
 // of employees
-public class EmployeeDAO {
+public class EmployeeDAO implements SampleService {
 
-	private Employees list ;//= new Employees();
+	private static Employees list = new Employees();
 	
-	public EmployeeDAO() {
-		list = new Employees();
+	static {
 		
 		// starter data for testing; comment out for real use
-		list.getEmployeeList().add(new Employee(1, "Prem", "Tiwari", "chapradreams@gmail.com"));
-		list.getEmployeeList().add(new Employee(2, "Vikash", "Kumar", "abc@gmail.com"));
-		list.getEmployeeList().add(new Employee(3, "Ritesh", "Ojha", "asdjf@gmail.com")); 
+		list.addEmployee(new Employee(1, "Prem", "Tiwari", "chapradreams@gmail.com"));
+		list.addEmployee(new Employee(2, "Vikash", "Kumar", "abc@gmail.com"));
+		list.addEmployee(new Employee(3, "Ritesh", "Ojha", "asdjf@gmail.com")); 
 	}
 
 	// Method to return the list
@@ -46,7 +40,7 @@ public class EmployeeDAO {
 			Integer id = list.size() + 1; // give it an id
 			employee.setId(id);
 		}
-		list.getEmployeeList().add(employee);
+		list.addEmployee(employee);
 	}
 
 	// Method to update all attributes of employee that

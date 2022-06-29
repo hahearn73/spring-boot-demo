@@ -10,10 +10,6 @@ public class Employee {
 	private String lastName;
 	private String email;
 	
-	// Parameterized Constructor
-	// to assign the values
-	// to the properties of
-	// the entity
 	public Employee(Integer id, String firstName, String lastName, String email)
 	{
 		super();

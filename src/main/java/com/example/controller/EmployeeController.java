@@ -17,7 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.domain.Employee;
 import com.example.repository.Employees;
-import com.example.service.EmployeeDAO;
+import com.example.service.impl.EmployeeDAO;
 
 // Creating the REST controller
 @RestController
